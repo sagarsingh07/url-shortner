@@ -13,13 +13,17 @@ import cookieParser from "cookie-parser"
 
 dotenv.config("./.env")
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // your React app
-    credentials: true // 👈 this allows cookies to be sent
+    origin: [
+        "http://localhost:5173",
+        "https://your-frontend.vercel.app"
+    ],
+    credentials: true
 }));
-
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
@@ -33,7 +37,7 @@ app.get("/:id",redirectFromShortUrl)
 
 app.use(errorHandler)
 
-app.listen(3000,()=>{
-    connectDB()
-    console.log("Server is running on http://localhost:3000");
-})
+app.listen(PORT, () => {
+    connectDB();
+    console.log(`Server running on port ${PORT}`);
+});
