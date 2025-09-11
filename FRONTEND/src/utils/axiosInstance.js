@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.REACT_APP_API_URL || "http://localhost:3000",
+    baseURL: import.meta.env.BACKEND_URL || "http://localhost:3000",
     timeout:10000, //10s
     withCredentials:true
 })
